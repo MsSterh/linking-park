@@ -1,0 +1,80 @@
+.App {
+  font-family: 'Open Sans', sans-serif;
+  min-width: 620px;
+  text-align: center;
+}
+
+.App-header {
+  background-color: #222;
+  padding: 20px 30px;
+  color: white;
+}
+
+.App-headerTitle {
+  margin: 0;
+}
+
+.AddForm {
+  padding: 20px 30px;
+}
+
+.AddForm-input1 {
+  border: 1px solid #ccc;
+  border-radius: 20px 0 0 20px;
+  font-size: 14px;
+  height: 30px;
+  padding: 5px 20px;
+}
+
+.AddForm-input2 {
+  border: 1px solid #ccc;
+  font-size: 14px;
+  height: 30px;
+  padding: 5px 20px;
+  margin-left: -1px;
+}
+
+.AddForm-submit {
+  background: #ff4000;
+  border: 1px solid #ff4000;
+  border-radius: 0 20px 20px 0;
+  color: #fff;
+  font-size: 14px;
+  height: 42px;
+  margin-left: -1px;
+  padding: 5px 20px;
+}
+
+.Items {
+  margin: 20px 30px;
+  text-align: left;
+}
+
+.Item {
+  margin: 20px 0;
+  position: relative;
+}
+
+.Item-title {
+  color: #555;
+  font-size: 14px;
+  margin: 0 0 -10px;
+}
+.Item-link {
+  color: #1E90FF;
+  font-size: 12px;
+}
+
+.Item-remove {
+  background: #bbb;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 11px;
+  line-height: 20px;
+  height: 20px;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
