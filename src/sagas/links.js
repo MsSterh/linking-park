@@ -7,13 +7,13 @@ export function *getLinks({db}) {
   const obj = yield call([linksRef, linksRef.once], 'value')
   const objValues = obj.val()
 
-  const linksArray = Object.keys(objValues).map(function(key) {
+  const linksArray = objValues ? Object.keys(objValues).map(function(key) {
     return {
       id: key,
       link: objValues[key].link.link,
       title: objValues[key].link.title
     }
-  })
+  }) : []
 
   yield put(getLinksSuccess(linksArray))
 }

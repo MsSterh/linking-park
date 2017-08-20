@@ -23,6 +23,7 @@
   border-radius: 20px 0 0 20px;
   font-size: 14px;
   height: 30px;
+  outline: none;
   padding: 5px 20px;
 }
 
@@ -30,8 +31,9 @@
   border: 1px solid #ccc;
   font-size: 14px;
   height: 30px;
-  padding: 5px 20px;
   margin-left: -1px;
+  outline: none;
+  padding: 5px 20px;
 }
 
 .AddForm-submit {
@@ -42,7 +44,13 @@
   font-size: 14px;
   height: 42px;
   margin-left: -1px;
+  outline: none;
   padding: 5px 20px;
+}
+.AddForm-error {
+  color: #ff4000;
+  font-size: 12px;
+  margin: 5px;
 }
 
 .Items {
@@ -73,6 +81,7 @@
   font-size: 11px;
   line-height: 20px;
   height: 20px;
+  outline: none;
   padding: 0 10px;
   position: absolute;
   top: 0;

@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
 import { getLinksRequest } from '../../actions/links'
-import { upadteLinkField, postLinkRequest, removeLinkRequest } from '../../actions/link'
+import { upadteLinkField, postLinkRequest,
+  postLinkFailure, removeLinkRequest } from '../../actions/link'
 import './styles.css'
 
 const mapStateToProps = state => ({
@@ -17,6 +18,7 @@ const mapDispatchToProps = dispatch => (
     getLinksRequestAction: getLinksRequest,
     upadteLinkFieldAction: upadteLinkField,
     postLinkRequestAction: postLinkRequest,
+    postLinkFailureAction: postLinkFailure,
     removeLinkRequestAction: removeLinkRequest
   }, dispatch)
 )
@@ -25,7 +27,8 @@ class App extends Component {
   static propTypes = {
     link: PropTypes.shape({
       title: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired
+      link: PropTypes.string.isRequired,
+      error: PropTypes.bool
     }),
     links: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -35,6 +38,7 @@ class App extends Component {
     getLinksRequestAction: PropTypes.func.isRequired,
     upadteLinkFieldAction: PropTypes.func.isRequired,
     postLinkRequestAction: PropTypes.func.isRequired,
+    postLinkFailureAction: PropTypes.func.isRequired,
     removeLinkRequestAction: PropTypes.func.isRequired
   }
 
@@ -50,8 +54,12 @@ class App extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const { link, postLinkRequestAction } = this.props
-    postLinkRequestAction(link)
+    const { link, postLinkRequestAction, postLinkFailureAction } = this.props
+    if (link.title === '' || link.link === '') {
+      postLinkFailureAction()
+    } else {
+      postLinkRequestAction(link)
+    }
   }
 
   removeItem = (itemId) => {
@@ -87,6 +95,9 @@ class App extends Component {
             <button className='AddForm-submit'>
               Add Link
             </button>
+            { link.error &&
+              <p className='AddForm-error'>All fields are required and can't be blank</p>
+            }
           </form>
         </section>
         <section className='Items'>
