@@ -1,0 +1,37 @@
+.Items {
+  margin: 20px 30px;
+  text-align: left;
+}
+
+.Item {
+  margin: 20px 0;
+  position: relative;
+}
+
+.Item-title {
+  color: #555;
+  font-size: 14px;
+  margin: 0;
+}
+.Item-link {
+  color: #1E90FF;
+  font-size: 12px;
+  line-height: 1.3;
+  margin: 10px 70px 0 0;
+  word-wrap: break-word;
+}
+
+.Item-remove {
+  background: #bbb;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 11px;
+  line-height: 20px;
+  height: 20px;
+  outline: none;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}

@@ -1,0 +1,38 @@
+.AddForm {
+  padding: 20px 30px;
+}
+
+.AddForm-input1 {
+  border: 1px solid #ccc;
+  border-radius: 20px 0 0 20px;
+  font-size: 14px;
+  height: 30px;
+  outline: none;
+  padding: 5px 20px;
+}
+
+.AddForm-input2 {
+  border: 1px solid #ccc;
+  font-size: 14px;
+  height: 30px;
+  margin-left: -1px;
+  outline: none;
+  padding: 5px 20px;
+}
+
+.AddForm-submit {
+  background: #ff4000;
+  border: 1px solid #ff4000;
+  border-radius: 0 20px 20px 0;
+  color: #fff;
+  font-size: 14px;
+  height: 42px;
+  margin-left: -1px;
+  outline: none;
+  padding: 5px 20px;
+}
+.AddForm-error {
+  color: #ff4000;
+  font-size: 12px;
+  margin: 5px;
+}
