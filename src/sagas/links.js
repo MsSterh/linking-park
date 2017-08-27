@@ -2,8 +2,8 @@ import { call, all, takeEvery, put } from 'redux-saga/effects'
 
 import { GET_LINKS_REQUEST, getLinksSuccess } from '../actions/links'
 
-export function *getLinks({db}) {
-  const linksRef = yield call([db, db.ref], 'links')
+export function *getLinks({db}, {userUid}) {
+  const linksRef = yield call([db, db.ref], `users/${userUid}/links`)
   const obj = yield call([linksRef, linksRef.once], 'value')
   const objValues = obj.val()
 

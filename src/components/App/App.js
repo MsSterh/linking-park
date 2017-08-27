@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
 import { getTokenRequest } from '../../actions/token'
-import { getLinksRequest } from '../../actions/links'
 import { upadteLinkField, postLinkRequest,
   postLinkFailure, removeLinkRequest } from '../../actions/link'
 import './styles.css'
@@ -19,7 +18,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     getTokenRequestAction: getTokenRequest,
-    getLinksRequestAction: getLinksRequest,
     upadteLinkFieldAction: upadteLinkField,
     postLinkRequestAction: postLinkRequest,
     postLinkFailureAction: postLinkFailure,
@@ -46,7 +44,6 @@ class App extends Component {
       link: PropTypes.string.isRequired
     })),
     getTokenRequestAction: PropTypes.func.isRequired,
-    getLinksRequestAction: PropTypes.func.isRequired,
     upadteLinkFieldAction: PropTypes.func.isRequired,
     postLinkRequestAction: PropTypes.func.isRequired,
     postLinkFailureAction: PropTypes.func.isRequired,
@@ -55,9 +52,6 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getTokenRequestAction()
-    this.props.getLinksRequestAction(() => {
-      console.log('success callback')
-    })
   }
 
   handleChange = (e) => {
@@ -67,15 +61,18 @@ class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { link, postLinkRequestAction, postLinkFailureAction } = this.props
+    const userUid = this.props.user.uid
+
     if (link.title === '' || link.link === '') {
       postLinkFailureAction()
     } else {
-      postLinkRequestAction(link)
+      postLinkRequestAction(userUid, link)
     }
   }
 
   removeItem = (itemId) => {
-    this.props.removeLinkRequestAction(itemId)
+    const userUid = this.props.user.uid
+    this.props.removeLinkRequestAction(userUid, itemId)
   }
 
   displayUserName = (user) => {
@@ -104,48 +101,52 @@ class App extends Component {
           <h1 className='Header-title'>Linking Park</h1>
           { user && user.uid ? this.displayUserName(user) : this.displayEmptyUser() }
         </section>
-        <section className='AddForm'>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              className='AddForm-input1'
-              type='text'
-              name='title'
-              placeholder='Link name'
-              onChange={this.handleChange}
-              value={link.title}
-            />
-            <input
-              className='AddForm-input2'
-              type='text'
-              name='link'
-              placeholder='Enter your link here...'
-              onChange={this.handleChange}
-              value={link.link}
-            />
-            <button className='AddForm-submit'>
-              Add Link
-            </button>
-            { link.error &&
-              <p className='AddForm-error'>All fields are required and can't be blank</p>
-            }
-          </form>
-        </section>
-        <section className='Items'>
-          <ol>
-          {links.map((item) => {
-            return (
-              <li key={item.id} className='Item'>
-                <h3 className='Item-title'>{item.title}</h3>
-                <p className='Item-link'>{item.link}</p>
-                <button
-                  className='Item-remove'
-                  onClick={this.removeItem.bind(this, item.id)}
-                >remove</button>
-              </li>
-            )
-          })}
-          </ol>
-        </section>
+        { user && user.uid &&
+          <section className='AddForm'>
+            <form onSubmit={this.handleSubmit}>
+              <input
+                className='AddForm-input1'
+                type='text'
+                name='title'
+                placeholder='Link name'
+                onChange={this.handleChange}
+                value={link.title}
+              />
+              <input
+                className='AddForm-input2'
+                type='text'
+                name='link'
+                placeholder='Enter your link here...'
+                onChange={this.handleChange}
+                value={link.link}
+              />
+              <button className='AddForm-submit'>
+                Add Link
+              </button>
+              { link.error &&
+                <p className='AddForm-error'>All fields are required and can't be blank</p>
+              }
+            </form>
+          </section>
+        }
+        { user && user.uid &&
+          <section className='Items'>
+            <ol>
+            {links.map((item) => {
+              return (
+                <li key={item.id} className='Item'>
+                  <h3 className='Item-title'>{item.title}</h3>
+                  <p className='Item-link'>{item.link}</p>
+                  <button
+                    className='Item-remove'
+                    onClick={this.removeItem.bind(this, item.id)}
+                  >remove</button>
+                </li>
+              )
+            })}
+            </ol>
+          </section>
+        }
       </div>
     )
   }

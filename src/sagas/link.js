@@ -8,19 +8,19 @@ const getLink = state => ({
   link: state.link
 })
 
-export function *postLink({db}) {
+export function *postLink({db}, {userUid}) {
   const link = yield select(getLink)
-  const linksRef = yield call([db, db.ref], 'links')
+  const linksRef = yield call([db, db.ref], `users/${userUid}/links`)
   yield call([linksRef, linksRef.push], link)
   yield put(postLinkSuccess())
-  yield put(getLinksRequest())
+  yield put(getLinksRequest(userUid))
 }
 
 
-export function *removeLink({db}, {linkId}) {
-  const itemRef = yield call([db, db.ref], `/links/${linkId}`)
+export function *removeLink({db}, {userUid, linkId}) {
+  const itemRef = yield call([db, db.ref], `users/${userUid}/links/${linkId}`)
   yield call([itemRef, itemRef.remove])
-  yield put(getLinksRequest())
+  yield put(getLinksRequest(userUid))
 }
 
 export function *watchLink(context) {
