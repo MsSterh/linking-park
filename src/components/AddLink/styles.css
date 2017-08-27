@@ -26,6 +26,7 @@
   border-radius: 0 20px 20px 0;
   color: #fff;
   font-size: 14px;
+  font-weight: 300;
   height: 42px;
   margin-left: -1px;
   outline: none;
@@ -35,4 +36,15 @@
   color: #ff4000;
   font-size: 12px;
   margin: 5px;
+}
+
+::-webkit-input-placeholder {
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 300;
+}
+::-moz-placeholder {
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 300;
 }

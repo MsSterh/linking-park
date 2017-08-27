@@ -10,7 +10,8 @@
 
 .Item-title {
   color: #555;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 600;
   margin: 0;
 }
 .Item-link {
@@ -27,6 +28,7 @@
   border-radius: 10px;
   color: #fff;
   font-size: 11px;
+  font-weight: 300;
   line-height: 20px;
   height: 20px;
   outline: none;

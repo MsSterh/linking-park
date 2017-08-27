@@ -10,7 +10,6 @@ import firebase from '../../database/firebase'
 import reducers from '../../reducers'
 import sagas from '../../sagas'
 import App from '../App'
-import './styles.css'
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
