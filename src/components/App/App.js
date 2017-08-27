@@ -11,6 +11,7 @@ import './styles.css'
 
 const mapStateToProps = state => ({
   token: state.token.token,
+  user: state.user,
   links: state.links.links,
   link: state.link
 })
@@ -29,6 +30,11 @@ const mapDispatchToProps = dispatch => (
 class App extends Component {
   static propTypes = {
     token: PropTypes.string,
+    user: PropTypes.shape({
+      uid: PropTypes.string,
+      name: PropTypes.string,
+      photo: PropTypes.string
+    }).isRequired,
     link: PropTypes.shape({
       title: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired,
@@ -72,16 +78,31 @@ class App extends Component {
     this.props.removeLinkRequestAction(itemId)
   }
 
+  displayUserName = (user) => {
+    return (
+      <p className='Header-text'>
+        <img src={user.photo} className='Header-photo' alt='Avatar' />
+        {user.name}
+      </p>
+    )
+  }
+
+  displayEmptyUser = () => {
+    return (
+      <p className='Header-text'>
+        Log In with Github
+      </p>
+    )
+  }
+
   render() {
-    const { link, links, token } = this.props
+    const { link, links, user } = this.props
 
     return (
       <div className='App'>
         <section className='Header'>
           <h1 className='Header-title'>Linking Park</h1>
-          <p className='Header-text'>
-            {token ? token : 'Log In with Github'}
-          </p>
+          { user && user.uid ? this.displayUserName(user) : this.displayEmptyUser() }
         </section>
         <section className='AddForm'>
           <form onSubmit={this.handleSubmit}>

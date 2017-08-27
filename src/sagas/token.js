@@ -1,6 +1,7 @@
 import { call, all, takeEvery, put } from 'redux-saga/effects'
 
 import { GET_TOKEN_REQUEST, updateToken, getTokenSuccess } from '../actions/token'
+import { updateUserFields } from '../actions/user'
 import { signInWithPopup } from '../lib/firebase'
 
 export function *setToken() {
@@ -10,7 +11,9 @@ export function *setToken() {
     if (result) {
       const token = result.credential.accessToken
       const user = result.user
+
       yield put(updateToken(token))
+      yield put(updateUserFields(user.uid, user.displayName, user.email, user.photoURL))
       yield put(getTokenSuccess())
     }
   } catch(error) {
