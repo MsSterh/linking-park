@@ -3,18 +3,21 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
+import { getTokenRequest } from '../../actions/token'
 import { getLinksRequest } from '../../actions/links'
 import { upadteLinkField, postLinkRequest,
   postLinkFailure, removeLinkRequest } from '../../actions/link'
 import './styles.css'
 
 const mapStateToProps = state => ({
+  token: state.token.token,
   links: state.links.links,
   link: state.link
 })
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
+    getTokenRequestAction: getTokenRequest,
     getLinksRequestAction: getLinksRequest,
     upadteLinkFieldAction: upadteLinkField,
     postLinkRequestAction: postLinkRequest,
@@ -25,6 +28,7 @@ const mapDispatchToProps = dispatch => (
 
 class App extends Component {
   static propTypes = {
+    token: PropTypes.string,
     link: PropTypes.shape({
       title: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired,
@@ -35,6 +39,7 @@ class App extends Component {
       title: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired
     })),
+    getTokenRequestAction: PropTypes.func.isRequired,
     getLinksRequestAction: PropTypes.func.isRequired,
     upadteLinkFieldAction: PropTypes.func.isRequired,
     postLinkRequestAction: PropTypes.func.isRequired,
@@ -43,6 +48,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.props.getTokenRequestAction()
     this.props.getLinksRequestAction(() => {
       console.log('success callback')
     })
@@ -67,13 +73,16 @@ class App extends Component {
   }
 
   render() {
-    const { link, links } = this.props
+    const { link, links, token } = this.props
 
     return (
       <div className='App'>
-        <div className='App-header'>
-          <h2 className='App-headerTitle'>Linking Park</h2>
-        </div>
+        <section className='Header'>
+          <h1 className='Header-title'>Linking Park</h1>
+          <p className='Header-text'>
+            {token ? token : 'Log In with Github'}
+          </p>
+        </section>
         <section className='AddForm'>
           <form onSubmit={this.handleSubmit}>
             <input
