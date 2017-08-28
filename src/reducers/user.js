@@ -1,4 +1,4 @@
-import { UPDATE_USER_FIELDS } from '../actions/user'
+import { UPDATE_USER_FIELDS, USER_LOG_OUT } from '../actions/user'
 
 const initialState = {
   uid: null,
@@ -17,6 +17,8 @@ const user = (state = initialState, action) => {
       email: action.email,
       photo: action.photo
     }
+  case USER_LOG_OUT:
+    return initialState
   default:
     return state
   }

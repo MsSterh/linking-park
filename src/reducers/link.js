@@ -1,4 +1,5 @@
 import { UPDATE_LINK_FIELD, POST_LINK_SUCCESS, POST_LINK_FAILURE } from '../actions/link'
+import { USER_LOG_OUT } from '../actions/user'
 
 const initialState = {
   link: '',
@@ -21,6 +22,8 @@ const link = (state = initialState, action) => {
       ...state,
       error: true
     }
+  case USER_LOG_OUT:
+    return initialState
   default:
     return state
   }

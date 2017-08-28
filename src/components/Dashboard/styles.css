@@ -32,3 +32,15 @@
   font-size: 13px;
   margin: 0;
 }
+
+.Header-link {
+  border-bottom: 1px solid #a7a7a7;
+  color: #a7a7a7;
+  font-size: 13px;
+  margin: 0 0 0 5px;
+  text-decoration: none;
+}
+.Header-link:hover {
+  color: #fff;
+}
+
