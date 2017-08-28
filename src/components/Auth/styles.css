@@ -10,6 +10,13 @@
   text-align: center;
 }
 
+.Auth-headerIcon {
+  margin: 0 20px;
+  position: relative;
+  top: 15px;
+  width: 80px;
+}
+
 .Auth-headerTitle {
   color: white;
   font-size: 60px;
@@ -43,8 +50,18 @@
   color: #fff;
   display: inline-block;
   font-size: 14px;
+  line-height: 20px;
   outline: none;
   margin: 35px 0;
-  padding: 10px 40px;
+  padding: 3px 40px 10px;
   text-decoration: none;
+}
+
+.Auth-githubIcon {
+  color: #fff;
+  height: 20px;
+  line-height: 20px;
+  margin: 3px 7px 0 15px;
+  position: relative;
+  top: 3px;
 }
